@@ -1,7 +1,11 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class PlayerHit : MonoBehaviour {
+
+	public PlayerAbuse abuseLevel;
+	public Text RudeComments; 
 
 	void OnTriggerEnter (Collider col) {
 
@@ -11,7 +15,9 @@ public class PlayerHit : MonoBehaviour {
 		}
 
 		else if (col.gameObject.name == "shipFire") {
-			Debug.Log ("WOAAHHHHHH DONT DO THAT SHIT BRUH!!!!");
+			//Debug.Log ("WOAAHHHHHH DONT DO THAT SHIT BRUH!!!!");
+			abuseLevel.TakeAbuse(4.0f);
+			RudeComments.text = "WOAAHHHHHH DONT DO THAT SHIT BRUH!!!!";
 			Destroy (col.gameObject);
 		}
 	}
