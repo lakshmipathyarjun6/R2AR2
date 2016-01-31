@@ -4,7 +4,8 @@ using System.Collections;
 public class EnemySpawnManager : MonoBehaviour {
 
 	// public PlayerHealth playerHealth;
-	public GameObject[] enemies;                // The enemy prefab to be spawned.
+	public Transform playerPosition;
+	public GameObject[] enemies;                // The enemy prefabs to be spawned.
 	public float spawnTime = 3f;            // How long between each spawn.
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 
@@ -44,9 +45,16 @@ public class EnemySpawnManager : MonoBehaviour {
 		enemyShip.AddComponent<MoveForwardShip> ();
 		enemyShip.AddComponent<FireProjectile> ();
 
+		FireProjectile projectileParameters = enemyShip.GetComponent<FireProjectile> ();
+
 		// Vader's ship only
 
-		/*FireProjectile theProjectile = enemyShip.GetComponent<FireProjectile> ();
-		theProjectile.spawnPoint = */
+		if (enemyShip.name == "star-wars-vader-tie-fighter(Clone)") {
+			projectileParameters.spawnPoint = enemyShip.transform.FindChild ("group").transform.FindChild ("EnginGlo_gunred");
+			projectileParameters.lasermaterial =  Resources.Load("Materials/gunred") as Material;
+		}
+
+		projectileParameters.playerPosition = playerPosition;
+			
 	}
 }
