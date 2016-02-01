@@ -12,36 +12,33 @@ public class FireProjectile : MonoBehaviour {
 
 	}
 
-	// Update is called once per frame
-	void Update () {
+	public void Fire () {
+		
+		LineRenderer beam;
+		GameObject laser = new GameObject ();
+		laser.transform.position = spawnPoint.position;
+		laser.transform.LookAt (playerPosition);
+		laser.name = "shipFire";
 
-		if (Input.GetKeyDown ("space")) {
-			LineRenderer beam;
-			GameObject laser = new GameObject ();
-			laser.transform.position = spawnPoint.position;
-			laser.transform.LookAt (playerPosition);
-			laser.name = "shipFire";
+		laser.AddComponent<BoxCollider> ();
+		BoxCollider collider = laser.GetComponent<Collider>() as BoxCollider;
+		collider.center = new Vector3(0.0f,0.0f,5.0f);
+		collider.size = new Vector3 (0.3f, 0.5f, 10.0f);
+		collider.isTrigger = true;
 
-			laser.AddComponent<BoxCollider> ();
-			BoxCollider collider = laser.GetComponent<Collider>() as BoxCollider;
-			collider.center = new Vector3(0.0f,0.0f,5.0f);
-			collider.size = new Vector3 (0.3f, 0.5f, 10.0f);
-			collider.isTrigger = true;
+		laser.AddComponent<Rigidbody> ();
+		Rigidbody body = laser.GetComponent<Rigidbody> ();
+		body.useGravity = false;
 
-			laser.AddComponent<Rigidbody> ();
-			Rigidbody body = laser.GetComponent<Rigidbody> ();
-			body.useGravity = false;
+		beam = laser.AddComponent<LineRenderer> ();
+		beam.material = lasermaterial;
+		beam.SetWidth (0.5f, 0.5f);
+		laser.AddComponent<MoveForwardLaser>();
 
-			beam = laser.AddComponent<LineRenderer> ();
-			beam.material = lasermaterial;
-			beam.SetWidth (0.5f, 0.5f);
-			laser.AddComponent<MoveForwardLaser>();
-
-			laser.AddComponent<AudioSource> ();
-			AudioSource fire = laser.GetComponent<AudioSource> ();
-			fire.clip = Resources.Load("Audio/VaderTieFire") as AudioClip;
-			fire.Play ();
-		}
+		laser.AddComponent<AudioSource> ();
+		AudioSource fire = laser.GetComponent<AudioSource> ();
+		fire.clip = Resources.Load("Audio/VaderTieFire") as AudioClip;
+		fire.Play ();
 
 	}
 } 

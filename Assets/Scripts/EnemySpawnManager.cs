@@ -3,7 +3,6 @@ using System.Collections;
 
 public class EnemySpawnManager : MonoBehaviour {
 
-	// public PlayerHealth playerHealth;
 	public Transform playerPosition;
 	public GameObject[] enemies;                // The enemy prefabs to be spawned.
 	public float spawnTime = 3f;            // How long between each spawn.
@@ -18,12 +17,6 @@ public class EnemySpawnManager : MonoBehaviour {
 	void Spawn ()
 	{
 		GameObject enemyShip;
-		/*// If the player has no health left...
-		if(playerHealth.currentHealth <= 0f)
-		{
-			// ... exit the function.
-			return;
-		} */
 
 		// Find a random index between zero and one less than the number of spawn points.
 		int enemyIndex = Random.Range (0,enemies.Length);
@@ -34,6 +27,12 @@ public class EnemySpawnManager : MonoBehaviour {
 		enemyShip.transform.localScale = new Vector3 (0.2f, 0.2f, 0.2f);
 		enemyShip.transform.rotation = Quaternion.Euler (0.0f, 90.0f, 0.0f);
 
+		// Change names to be more readable
+
+		if (enemyShip.name == "star-wars-vader-tie-fighter(Clone)") {
+			enemyShip.name = "VaderShip";
+		}
+
 		enemyShip.AddComponent<BoxCollider> ();
 		BoxCollider collider = enemyShip.GetComponent<Collider>() as BoxCollider;
 		collider.size = new Vector3 (20.0f, 20.0f, 20.0f);
@@ -42,19 +41,9 @@ public class EnemySpawnManager : MonoBehaviour {
 		Rigidbody body = enemyShip.GetComponent<Rigidbody> ();
 		body.useGravity = false;
 
-		enemyShip.AddComponent<MoveForwardShip> ();
-		enemyShip.AddComponent<FireProjectile> ();
-
-		FireProjectile projectileParameters = enemyShip.GetComponent<FireProjectile> ();
-
-		// Vader's ship only
-
-		if (enemyShip.name == "star-wars-vader-tie-fighter(Clone)") {
-			projectileParameters.spawnPoint = enemyShip.transform.FindChild ("group").transform.FindChild ("EnginGlo_gunred");
-			projectileParameters.lasermaterial =  Resources.Load("Materials/gunred") as Material;
-		}
-
-		projectileParameters.playerPosition = playerPosition;
+		enemyShip.AddComponent<EnemyAI> ();
+		EnemyAI ai = enemyShip.GetComponent<EnemyAI> ();
+		ai.playerPosition = playerPosition;
 			
 	}
 }

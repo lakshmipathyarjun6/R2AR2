@@ -4,7 +4,14 @@ using System.Collections;
 public class EnemyCleanupManager : MonoBehaviour {
 	
 	void OnTriggerEnter (Collider col) {
-		Destroy (col.gameObject);
+
+		if (col.gameObject.name == "shipFire") {
+			Destroy (col.gameObject);
+		} 
+
+		else if (col.gameObject.name == "VaderShip") {
+			Destroy (col.gameObject);
+		}
 	}
 
 }
