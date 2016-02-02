@@ -5,6 +5,7 @@ public class EnemyAI : MonoBehaviour {
 
 	public Transform playerPosition;
 	public float spawnTime = 5f;
+	public bool canAttackPlayer = false;
 
 	// Use this for initialization
 	void Start () {
@@ -30,8 +31,10 @@ public class EnemyAI : MonoBehaviour {
 
 	void Attack () {
 	
-		FireProjectile projectile = gameObject.GetComponent<FireProjectile> ();
-		projectile.Fire ();
+		//if (canAttackPlayer) {
+			FireProjectile projectile = gameObject.GetComponent<FireProjectile> ();
+			projectile.Fire ();
+		//}
 
 	}
 }

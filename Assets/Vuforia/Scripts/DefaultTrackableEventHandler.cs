@@ -14,6 +14,7 @@ namespace Vuforia
     public class DefaultTrackableEventHandler : MonoBehaviour,
                                                 ITrackableEventHandler
     {
+
         #region PRIVATE_MEMBER_VARIABLES
  
         private TrackableBehaviour mTrackableBehaviour;
@@ -26,6 +27,7 @@ namespace Vuforia
     
         void Start()
         {
+			//gameObject.AddComponent<EnemyAI> ();
             mTrackableBehaviour = GetComponent<TrackableBehaviour>();
             if (mTrackableBehaviour)
             {
@@ -84,6 +86,9 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+
+			//EnemyAI ai = gameObject.GetComponent<EnemyAI> ();
+			//ai.canAttackPlayer = true;
         }
 
 
@@ -105,6 +110,9 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+
+			//EnemyAI ai = gameObject.GetComponent<EnemyAI> ();
+			//ai.canAttackPlayer = false;
         }
 
         #endregion // PRIVATE_METHODS
