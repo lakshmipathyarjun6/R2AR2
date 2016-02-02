@@ -9,7 +9,7 @@ public class PlayerHit : MonoBehaviour {
 
 	void OnTriggerEnter (Collider col) {
 
-		if (col.gameObject.name == "star-wars-vader-tie-fighter(Clone)") {
+		if (col.gameObject.name == "VaderShip") {
 			Debug.Log ("Ouch what the hell man?!");
 			Destroy (col.gameObject);
 		}
