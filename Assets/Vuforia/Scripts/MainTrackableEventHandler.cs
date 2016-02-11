@@ -96,6 +96,9 @@ namespace Vuforia
 			AudioSource themeMusic = gameObject.GetComponent<AudioSource> ();
 			themeMusic.clip = soundtracks [track];
 			themeMusic.Play ();
+
+			GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+			mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = true;
         }
 
 
@@ -117,6 +120,15 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
+
+			AudioSource themeMusic = gameObject.GetComponent<AudioSource> ();
+			themeMusic.Stop ();
+			Destroy (gameObject.GetComponent<AudioSource> ());
+
+			GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+			mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = false;
+
+			gameObject.GetComponent<CleanupMaster> ().cleanUpAll ();
         }
 
         #endregion // PRIVATE_METHODS

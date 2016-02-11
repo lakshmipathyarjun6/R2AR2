@@ -23,11 +23,6 @@ public class EnemyAI : MonoBehaviour {
 
 		InvokeRepeating ("Attack", spawnTime, spawnTime);
 	}
-	
-	/* // Update is called once per frame
-	void Update () {
-	
-	} */
 
 	void Attack () {
 	
