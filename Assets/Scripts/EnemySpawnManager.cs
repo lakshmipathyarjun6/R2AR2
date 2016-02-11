@@ -26,15 +26,21 @@ public class EnemySpawnManager : MonoBehaviour {
 
 			// Create an instance of the enemy prefab at the randomly selected spawn point's position and rotation.
 			enemyShip = Instantiate (enemies [enemyIndex], spawnPoints [spawnPointIndex].position, spawnPoints [spawnPointIndex].rotation) as GameObject;
-			enemyShip.transform.localScale = new Vector3 (0.2f, 0.2f, 0.2f);
 			enemyShip.transform.rotation = Quaternion.Euler (0.0f, 90.0f, 0.0f);
 
 			// Change names to be more readable
 
 			if (enemyShip.name == "star-wars-vader-tie-fighter(Clone)") {
+				enemyShip.transform.localScale = new Vector3 (0.2f, 0.2f, 0.2f);
 				enemyShip.name = "VaderShip";
-				enemyShip.tag = "EnemyShip";
 			}
+
+			else if (enemyShip.name == "sithcraft(Clone)") {
+				enemyShip.transform.localScale = new Vector3 (0.3f, 0.3f, 0.3f);
+				enemyShip.name = "SithCraft";
+			}
+
+			enemyShip.tag = "EnemyShip";
 
 			enemyShip.AddComponent<BoxCollider> ();
 			BoxCollider collider = enemyShip.GetComponent<Collider> () as BoxCollider;

@@ -19,6 +19,11 @@ public class EnemyAI : MonoBehaviour {
 			projectileParameters.lasermaterial =  Resources.Load("Materials/gunred") as Material;
 		}
 
+		else if (gameObject.name == "SithCraft") {
+			projectileParameters.spawnPoint = gameObject.transform.FindChild ("sit").transform.FindChild ("si1").transform.FindChild("laserside");
+			projectileParameters.lasermaterial =  Resources.Load("Materials/gunred") as Material;
+		}
+
 		projectileParameters.playerPosition = playerPosition;
 
 		InvokeRepeating ("Attack", spawnTime, spawnTime);

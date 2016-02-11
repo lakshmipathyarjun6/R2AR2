@@ -18,7 +18,7 @@ public class FireProjectile : MonoBehaviour {
 		GameObject laser = new GameObject ();
 		laser.transform.position = spawnPoint.position;
 		laser.transform.LookAt (playerPosition);
-		laser.name = "VaderShipFire";
+		laser.name = "shipFire";
 		laser.tag = "EnemyFire";
 
 		laser.AddComponent<BoxCollider> ();
