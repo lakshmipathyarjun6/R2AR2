@@ -90,6 +90,8 @@ namespace Vuforia
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
 
+			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<UIController> ().ChangeState (1);
+
 			int track = Random.Range (0,soundtracks.Length);
 
 			gameObject.AddComponent<AudioSource> ();
@@ -129,6 +131,8 @@ namespace Vuforia
 			mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = false;
 
 			gameObject.GetComponent<CleanupMaster> ().cleanUpAll ();
+
+			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<UIController> ().ChangeState (-1);
         }
 
         #endregion // PRIVATE_METHODS
