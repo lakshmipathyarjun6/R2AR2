@@ -23,6 +23,7 @@ public class PlayerAbuse : MonoBehaviour {
 
 		if (curAbuse <= 0.0f) {
 			AudioSource deathScream = gameObject.GetComponent<AudioSource> ();
+			deathScream.clip = Resources.Load("Audio/R2Scream") as AudioClip;
 			deathScream.Play ();
 			curAbuse = 0.0f;
 		}

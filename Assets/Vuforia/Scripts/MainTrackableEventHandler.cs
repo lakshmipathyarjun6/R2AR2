@@ -18,6 +18,7 @@ namespace Vuforia
     {
 
 		public AudioClip [] soundtracks;
+		public int MusicSelection = -1;
 
         #region PRIVATE_MEMBER_VARIABLES
  
@@ -92,16 +93,53 @@ namespace Vuforia
 
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<UIController> ().ChangeState (1);
 
-			int track = Random.Range (0,soundtracks.Length);
+			if (MusicSelection == -1) {
+			} 
+
+			else {
+				//int track = Random.Range (0,soundtracks.Length);
+
+				//gameObject.AddComponent<AudioSource> ();
+				AudioSource themeMusic = gameObject.GetComponent<AudioSource> ();
+				//themeMusic.clip = soundtracks [track];
+				themeMusic.clip = soundtracks [MusicSelection];
+				themeMusic.Play ();
+
+				GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+				mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = true;
+			}
+        }
+
+		public void StartGame(string songSelection) {
+
+			switch (songSelection) {
+				case "MainThemeMusicOption":
+					MusicSelection = 0;
+					break;
+				case "ImperialMarchMusicOption":
+					MusicSelection = 1;
+					break;
+				case "DuelOfFatesMusicOption":
+					MusicSelection = 2;
+					break;
+				default:
+					MusicSelection = 3;
+					break;
+			}
 
 			gameObject.AddComponent<AudioSource> ();
 			AudioSource themeMusic = gameObject.GetComponent<AudioSource> ();
-			themeMusic.clip = soundtracks [track];
+			themeMusic.clip = soundtracks [MusicSelection];
 			themeMusic.Play ();
 
 			GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
 			mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = true;
-        }
+
+			GameObject[] musicBoxes = GameObject.FindGameObjectsWithTag ("MusicSelectionBox");
+			foreach(GameObject box in musicBoxes) {
+				Destroy (box);
+			}
+		}
 
 
         private void OnTrackingLost()
@@ -122,17 +160,20 @@ namespace Vuforia
             }
 
             Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
-
-			AudioSource themeMusic = gameObject.GetComponent<AudioSource> ();
-			themeMusic.Stop ();
-			Destroy (gameObject.GetComponent<AudioSource> ());
-
-			GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
-			mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = false;
-
-			gameObject.GetComponent<CleanupMaster> ().cleanUpAll ();
-
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<UIController> ().ChangeState (-1);
+
+			if (MusicSelection == -1) {
+			} 
+
+			else {
+				AudioSource themeMusic = gameObject.GetComponent<AudioSource> ();
+				themeMusic.Stop ();
+
+				GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+				mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = false;
+
+				gameObject.GetComponent<CleanupMaster> ().cleanUpAll ();
+			}
         }
 
         #endregion // PRIVATE_METHODS

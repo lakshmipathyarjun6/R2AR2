@@ -5,6 +5,7 @@ Confidential and Proprietary - Qualcomm Connected Experiences, Inc.
 ==============================================================================*/
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Vuforia
 {
@@ -14,10 +15,12 @@ namespace Vuforia
 	public class PlayerTrackableEventHandler : MonoBehaviour,
 	ITrackableEventHandler
 	{
+		public Text comments;
 
 		#region PRIVATE_MEMBER_VARIABLES
 
 		private TrackableBehaviour mTrackableBehaviour;
+		private bool audioSourceAttached = false;
 
 		#endregion // PRIVATE_MEMBER_VARIABLES
 
@@ -86,8 +89,13 @@ namespace Vuforia
 			}
 
 			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " found");
+			AudioSource r2Sounds = gameObject.AddComponent<AudioSource> ();
+			audioSourceAttached = true;
+			r2Sounds.clip = Resources.Load("Audio/WelcomeSound") as AudioClip;
+			r2Sounds.Play ();
 
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<UIController> ().ChangeState (1);
+			comments.text = "Welcome! Choose a song to get started!";
 		}
 
 
@@ -111,6 +119,11 @@ namespace Vuforia
 			Debug.Log("Trackable " + mTrackableBehaviour.TrackableName + " lost");
 
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<UIController> ().ChangeState (-1);
+
+			if (audioSourceAttached) {
+				AudioSource r2sounds = gameObject.GetComponent<AudioSource> ();
+				r2sounds.Stop ();
+			}
 		}
 
 		#endregion // PRIVATE_METHODS

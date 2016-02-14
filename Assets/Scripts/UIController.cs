@@ -25,6 +25,8 @@ public class UIController : MonoBehaviour {
 		state += forwardOrBackward;
 		if (state < 0)
 			state = 0;
+	
+		Debug.Log (state);
 
 		switch (state) {
 			case 1:
@@ -42,7 +44,6 @@ public class UIController : MonoBehaviour {
 
 	void EnableDefaultState() {
 		GameObject[] elements = GameObject.FindGameObjectsWithTag ("MainGameUIElement");
-		Debug.Log (elements.Length);
 		foreach(GameObject element in elements) {
 			if (element.GetComponent<Image> ()) {
 				element.GetComponent<Image> ().enabled = false;
@@ -59,7 +60,6 @@ public class UIController : MonoBehaviour {
 
 	void EnableR2SearchingState() {
 		GameObject[] elements = GameObject.FindGameObjectsWithTag ("MainGameUIElement");
-		Debug.Log (elements.Length);
 		foreach(GameObject element in elements) {
 			if (element.GetComponent<Image> ()) {
 				element.GetComponent<Image> ().enabled = false;
@@ -81,7 +81,6 @@ public class UIController : MonoBehaviour {
 
 	void EnableMainGameState() {
 		GameObject[] elements = GameObject.FindGameObjectsWithTag ("MainGameUIElement");
-		Debug.Log (elements.Length);
 		foreach(GameObject element in elements) {
 			if (element.GetComponent<Image> ()) {
 				element.GetComponent<Image> ().enabled = true;
