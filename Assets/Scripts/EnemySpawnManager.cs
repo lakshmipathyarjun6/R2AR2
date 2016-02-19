@@ -8,13 +8,13 @@ public class EnemySpawnManager : MonoBehaviour {
 	public float spawnTime = 3f;            // How long between each spawn.
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
 	public bool canSpawn = false;
-	int count = 1;
-	public int shipCount = 0;
-	public int wavecount = 1;
-	public Text wavetext;
-	public float delay1 = 5;
-	public float next = 0;
-
+	int count = 1; //to check if wavetext should be displayed
+	public int shipCount = 0; // ship count per wave
+	public int wavecount = 1; //total wave count
+	public Text wavetext; //wave text display
+	public float delay1 = 4; //delay between wave text displays
+	public float next = 0; // variable I might destroy
+	public int shipdead = 0; // to count ships destroyed
 	// Use this for initialization
 	void Start () {
 		// Call the Spawn function after a delay of the spawnTime and then continue to call after the same amount of time.
@@ -61,10 +61,10 @@ public class EnemySpawnManager : MonoBehaviour {
      }
 	
 
-	IEnumerator newWave(){
+	/*IEnumerator newWave(){
 		yield return new WaitForSeconds(10);
 		StopCoroutine("newWave");
-	}
+	}*/
 
 
 
@@ -77,33 +77,40 @@ public class EnemySpawnManager : MonoBehaviour {
 		//while(shipCount < 3)
 		//{
 		//Debug.Log("Check 1");
+		shipdead = EnemyCleanupManager.Instance.destroyed;
+		if(shipdead == wavecount*3){
+			shipCount = 0;
+			wavecount++;
+				count = 1;
+				next = Time.time + delay1;
+				EnemyCleanupManager.Instance.destroyed = 0;
+		}
+		Debug.Log("shipdead: " + shipdead);
 		if (Time.time > next){
-		if( shipCount < wavecount*3 ){
-		Debug.Log("1111");
-		if(count == 1  && canSpawn ) {
+			if( shipCount < wavecount*3 ){
+				Debug.Log("1111");
+				if(count == 1  && canSpawn ) {
 			Debug.Log("Check 12");
 			Text wavetext = GameObject.FindGameObjectWithTag("WaveText").GetComponent<Text>();
 			wavetext.text = "Wave " + wavecount;
 			wavetext.enabled = true;
-			Invoke("Delay", 2);
+			Invoke("Delay", 1);
 			count = 0;
 			//StartCoroutine(Delay());
 			//System.Threading.Thread.Sleep(3000);
 			//wavetext.enabled = false;
-		}	
-		if (canSpawn) {
+				}	
+				if (canSpawn) {
 			//Debug.Log("Check 13");
 			//Debug.Log("012233");
 			GameObject enemyShip;
 			shipCount ++;
-			if(shipCount >= wavecount*3)
+			/*if(shipdead == wavecount*3)
 			{
-				wavecount++;
-				count = 1;
-				next = Time.time + delay1;
+				
 				//StopCoroutine("Spawn");
 				//yield return new WaitForSeconds(3);
-			}
+			}*/
 			// Find a random index between zero and one less than the number of spawn points.
 			int enemyIndex = Random.Range (0, enemies.Length);
 			int spawnPointIndex = Random.Range (0, spawnPoints.Length);
