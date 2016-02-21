@@ -6,10 +6,12 @@ public class PlayerAbuse : MonoBehaviour {
 	public float maxAbuse = 100.0f;
 	public float curAbuse = 0.0f;
 	public GameObject abuseBar;
+	public GameObject smokingEffect;
 
 	// Use this for initialization
 	void Start () {
-		curAbuse = maxAbuse;  
+		curAbuse = maxAbuse; 
+		smokingEffect.GetComponent<ParticleSystem> ().enableEmission = false;
 	}
 	
 	// Update is called once per frame
@@ -20,6 +22,10 @@ public class PlayerAbuse : MonoBehaviour {
 
 	public void TakeAbuse (float amount) {
 		curAbuse -= amount;
+
+		if (curAbuse <= 20.0f) {
+			smokingEffect.GetComponent<ParticleSystem> ().enableEmission = true;
+		}
 
 		if (curAbuse <= 0.0f) {
 			AudioSource deathScream = gameObject.GetComponent<AudioSource> ();
