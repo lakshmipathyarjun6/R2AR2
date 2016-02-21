@@ -5,7 +5,8 @@ using System.Collections;
 public class PlayerHit : MonoBehaviour {
 
 	public PlayerAbuse abuseLevel;
-	public Text RudeComments; 
+	public Text RudeComments;
+	public GameObject explosionEffect;
 
 	//public AudioClip playerHitSound;
 
@@ -18,6 +19,8 @@ public class PlayerHit : MonoBehaviour {
 		gameObject.GetComponent<AudioSource> ().clip = Resources.Load("Audio/PlayerHit") as AudioClip;
 
 		if (col.gameObject.tag == "EnemyShip") {
+			abuseLevel.TakeAbuse (20.0f);
+
 			Debug.Log ("Ouch what the hell man?!");
 			Destroy (col.gameObject);
 		} 
@@ -27,6 +30,7 @@ public class PlayerHit : MonoBehaviour {
 			RudeComments.text = "WOAAHHHHHH DONT DO THAT SHIT BRUH!!!!";
 
 			gameObject.GetComponent<AudioSource> ().Play ();
+			Instantiate (explosionEffect, transform.position + new Vector3(0.0f,1.0f,0.0f), transform.rotation);
 
 			Destroy (col.gameObject);
 		} 
