@@ -77,7 +77,8 @@ public class EnemySpawnManager : MonoBehaviour {
 		//while(shipCount < 3)
 		//{
 		//Debug.Log("Check 1");
-		shipdead = EnemyCleanupManager.Instance.destroyed;
+		if(EnemyCleanupManager.Instance != null)
+			shipdead = EnemyCleanupManager.Instance.destroyed;
 		if(shipdead == wavecount*3){
 			shipCount = 0;
 			wavecount++;
@@ -94,7 +95,7 @@ public class EnemySpawnManager : MonoBehaviour {
 			Text wavetext = GameObject.FindGameObjectWithTag("WaveText").GetComponent<Text>();
 			wavetext.text = "Wave " + wavecount;
 			wavetext.enabled = true;
-			Invoke("Delay", 1);
+			Invoke("Delay", 2);
 			count = 0;
 			//StartCoroutine(Delay());
 			//System.Threading.Thread.Sleep(3000);

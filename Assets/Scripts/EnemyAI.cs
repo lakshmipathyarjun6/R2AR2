@@ -16,12 +16,12 @@ public class EnemyAI : MonoBehaviour {
 
 		if (gameObject.name == "VaderShip") {
 			projectileParameters.spawnPoint = gameObject.transform.FindChild ("group").transform.FindChild ("EnginGlo_gunred");
-			projectileParameters.lasermaterial =  Resources.Load("Materials/gunred") as Material;
+			projectileParameters.lasermaterial =  Resources.Load("Materials/shot_mat") as Material;
 		}
 
 		else if (gameObject.name == "SithCraft") {
 			projectileParameters.spawnPoint = gameObject.transform.FindChild ("sit").transform.FindChild ("si1").transform.FindChild("laserside");
-			projectileParameters.lasermaterial =  Resources.Load("Materials/gunred") as Material;
+			projectileParameters.lasermaterial =  Resources.Load("Materials/shot_mat") as Material;
 		}
 
 		projectileParameters.playerPosition = playerPosition;

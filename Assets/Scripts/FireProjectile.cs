@@ -33,7 +33,7 @@ public class FireProjectile : MonoBehaviour {
 
 		beam = laser.AddComponent<LineRenderer> ();
 		beam.material = lasermaterial;
-		beam.SetWidth (0.5f, 0.5f);
+		//beam.SetWidth (0.2f, 0.2f);
 		laser.AddComponent<MoveForwardLaser>();
 
 		laser.AddComponent<AudioSource> ();
