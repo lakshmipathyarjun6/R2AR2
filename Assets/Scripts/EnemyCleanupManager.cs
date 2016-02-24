@@ -3,8 +3,8 @@ using System.Collections;
 using UnityEngine.UI;
 
 public class EnemyCleanupManager : MonoBehaviour {
-	public float points = 0;
-	public Text scoreText;
+	public Canvas uicanvas;
+
 	int check = 0;
 	public int destroyed = 0;
 	public static EnemyCleanupManager Instance;
@@ -18,9 +18,7 @@ public class EnemyCleanupManager : MonoBehaviour {
 			check = UIController.Instance.state;
 			if(check != 1)
 			{
-				points = points + 1;
-			//Text scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
-			scoreText.text = "Score: " + points;
+				uicanvas.GetComponent<UIController> ().updateScore (1);
 			}
 		} 
 
@@ -30,9 +28,7 @@ public class EnemyCleanupManager : MonoBehaviour {
 			check = UIController.Instance.state;
 			if(check != 1)
 			{
-				points = points + 5;
-			//Text scoreText = GameObject.FindGameObjectWithTag("ScoreText").GetComponent<Text>();
-			scoreText.text = "Score: " + points;
+				uicanvas.GetComponent<UIController> ().updateScore (5);
 			}
 		}
 	}

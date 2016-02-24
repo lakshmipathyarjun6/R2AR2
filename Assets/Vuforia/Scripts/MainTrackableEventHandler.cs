@@ -5,6 +5,7 @@ Confidential and Proprietary - Qualcomm Connected Experiences, Inc.
 ==============================================================================*/
 
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Vuforia
 {
@@ -16,7 +17,7 @@ namespace Vuforia
     public class MainTrackableEventHandler : MonoBehaviour,
                                                 ITrackableEventHandler
     {
-
+		public Canvas uicanvas;
 		public AudioClip [] soundtracks;
 		public int MusicSelection = -1;
 
@@ -122,8 +123,11 @@ namespace Vuforia
 				case "DuelOfFatesMusicOption":
 					MusicSelection = 2;
 					break;
-				default:
+				case "BattleOfTheHeroesMusicOption":
 					MusicSelection = 3;
+					break;
+				default:
+					uicanvas.GetComponent<UIController> ().ResetartGame ();
 					break;
 			}
 

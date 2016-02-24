@@ -6,6 +6,8 @@ public class UIController : MonoBehaviour {
 
 	public int state = 0;
 	public static UIController Instance;
+	public Text scoreText;
+	float points = 0;
 
 	public void ChangeState(int forwardOrBackward) {
 		Instance = this;
@@ -93,4 +95,14 @@ public class UIController : MonoBehaviour {
 		centralText.text = "Game Over";
 	}
 
+	public void updateScore(int updateAmount) {
+		points += updateAmount;
+		scoreText.text = "Score: " + points;
+	}
+
+	public void ResetartGame() {
+		points = 0;
+		scoreText.text = "Score: " + points;
+		EnableMainGameState ();
+	}
 }
