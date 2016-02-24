@@ -129,6 +129,7 @@ namespace Vuforia
 
 			gameObject.AddComponent<AudioSource> ();
 			AudioSource themeMusic = gameObject.GetComponent<AudioSource> ();
+			themeMusic.loop = true;
 			themeMusic.clip = soundtracks [MusicSelection];
 			themeMusic.Play ();
 
