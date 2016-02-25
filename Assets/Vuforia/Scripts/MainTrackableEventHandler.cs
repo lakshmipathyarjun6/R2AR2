@@ -138,7 +138,7 @@ namespace Vuforia
 			themeMusic.Play ();
 
 			GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
-			mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = true;
+			mainBoard.GetComponent<EnemySpawnManager> ().Init();
 
 			GameObject[] musicBoxes = GameObject.FindGameObjectsWithTag ("MusicSelectionBox");
 			foreach(GameObject box in musicBoxes) {

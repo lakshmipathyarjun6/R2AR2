@@ -28,7 +28,14 @@ public class EnemySpawnManager : MonoBehaviour {
         wavetext.enabled = false;
      }
 
-
+	public void Init() {
+		wavecount = 1;
+		count = 1;
+		shipCount = 0;
+		shipdead = 0;
+		canSpawn = true;
+	}
+		
 	void Spawn ()
 	{	
 		Instance = this;
@@ -37,11 +44,11 @@ public class EnemySpawnManager : MonoBehaviour {
 		if(shipdead == wavecount*3){
 			shipCount = 0;
 			wavecount++;
-				count = 1;
-				next = Time.time + delay1;
-				EnemyCleanupManager.Instance.destroyed = 0;
+			count = 1;
+			next = Time.time + delay1;
+			EnemyCleanupManager.Instance.destroyed = 0;
 		}
-		Debug.Log("shipdead: " + shipdead);
+		//Debug.Log("shipdead: " + shipdead);
 		if (Time.time > next){
 			if( shipCount < wavecount*3 ){
 				if(count == 1  && canSpawn ) {
@@ -51,7 +58,7 @@ public class EnemySpawnManager : MonoBehaviour {
 					Invoke("Delay", 2);
 					count = 0;
 				}	
-				if (canSpawn) {
+				else if (canSpawn) {
 
 					GameObject enemyShip;
 					shipCount ++;

@@ -14,7 +14,6 @@ public class EnemyCleanupManager : MonoBehaviour {
 		Instance = this;
 		if (col.gameObject.tag == "EnemyFire") {
 			Destroy (col.gameObject);
-			//destroyed++;
 			check = UIController.Instance.state;
 			if(check != 1)
 			{
