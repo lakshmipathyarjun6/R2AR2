@@ -16,6 +16,8 @@ public class MoveForwardLaser : MonoBehaviour {
 		check = UIController.Instance.state;
 		if(check != 1)
 		{
+			if(EnemySpawnManager.Instance != null)
+				speed = EnemySpawnManager.Instance.wavecount * 10;
 			transform.position += transform.forward * speed * Time.deltaTime;
 		beam = gameObject.GetComponent<LineRenderer> ();
 		beam.SetPosition (0, transform.position);

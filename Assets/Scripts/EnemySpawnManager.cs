@@ -15,6 +15,7 @@ public class EnemySpawnManager : MonoBehaviour {
 	public float delay1 = 4; //delay between wave text displays
 	public float next = 0; // variable I might destroy
 	public int shipdead = 0; // to count ships destroyed
+	public static EnemySpawnManager Instance;
 	// Use this for initialization
 
 	void Start () {
@@ -30,6 +31,7 @@ public class EnemySpawnManager : MonoBehaviour {
 
 	void Spawn ()
 	{	
+		Instance = this;
 		if(EnemyCleanupManager.Instance != null)
 			shipdead = EnemyCleanupManager.Instance.destroyed;
 		if(shipdead == wavecount*3){

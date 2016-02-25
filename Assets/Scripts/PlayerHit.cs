@@ -17,6 +17,7 @@ public class PlayerHit : MonoBehaviour {
 
 			Debug.Log ("Ouch what the hell man?!");
 			Destroy (col.gameObject);
+			EnemyCleanupManager.Instance.destroyed++;
 		} 
 
 		else if (col.gameObject.tag == "EnemyFire") {
