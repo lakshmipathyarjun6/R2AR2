@@ -5,7 +5,7 @@ public class FireProjectile : MonoBehaviour {
 
 	public Transform spawnPoint;
 	public Material lasermaterial;
-	public Transform playerPosition;
+	public GameObject player;
 
 	// Use this for initialization
 	void Start () {
@@ -17,7 +17,7 @@ public class FireProjectile : MonoBehaviour {
 		LineRenderer beam;
 		GameObject laser = new GameObject ();
 		laser.transform.position = spawnPoint.position;
-		laser.transform.LookAt (playerPosition);
+		laser.transform.LookAt (player.GetComponent<BoxCollider>().ClosestPointOnBounds(laser.transform.position));
 		laser.name = "shipFire";
 		laser.tag = "EnemyFire";
 

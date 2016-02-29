@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyAI : MonoBehaviour {
 
-	public Transform playerPosition;
+	public GameObject player;
 	public float spawnTime = 5f;
 	public bool canAttackPlayer = false;
 
@@ -24,17 +24,13 @@ public class EnemyAI : MonoBehaviour {
 			projectileParameters.lasermaterial =  Resources.Load("Materials/shot_mat") as Material;
 		}
 
-		projectileParameters.playerPosition = playerPosition;
+		projectileParameters.player = player;
 
 		InvokeRepeating ("Attack", spawnTime, spawnTime);
 	}
 
 	void Attack () {
-	
-		//if (canAttackPlayer) {
-			FireProjectile projectile = gameObject.GetComponent<FireProjectile> ();
-			projectile.Fire ();
-		//}
-
+		FireProjectile projectile = gameObject.GetComponent<FireProjectile> ();
+		projectile.Fire ();
 	}
 }

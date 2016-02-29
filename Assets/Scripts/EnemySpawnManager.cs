@@ -3,7 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 public class EnemySpawnManager : MonoBehaviour {
 
-	public Transform playerPosition;
+	public GameObject player;
 	public GameObject[] enemies;                // The enemy prefabs to be spawned.
 	public float spawnTime = 3f;            // How long between each spawn.
 	public Transform[] spawnPoints;         // An array of the spawn points this enemy can spawn from.
@@ -11,7 +11,6 @@ public class EnemySpawnManager : MonoBehaviour {
 	int count = 1; //to check if wavetext should be displayed
 	public int shipCount = 0; // ship count per wave
 	public int wavecount = 1; //total wave count
-	public Text wavetext; //wave text display
 	public float delay1 = 4; //delay between wave text displays
 	public float next = 0; // variable I might destroy
 	public int shipdead = 0; // to count ships destroyed
@@ -95,7 +94,7 @@ public class EnemySpawnManager : MonoBehaviour {
 
 					enemyShip.AddComponent<EnemyAI> ();
 					EnemyAI ai = enemyShip.GetComponent<EnemyAI> ();
-					ai.playerPosition = playerPosition;
+					ai.player = player;
 			
 				}
 			}

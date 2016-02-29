@@ -51,13 +51,17 @@ public class PlayerHealth : MonoBehaviour {
 
 			GameObject.FindGameObjectWithTag ("MainUI").GetComponent<UIController> ().EnableGameOverState ();
 
-			GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+			//GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+			//mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = false;
+
+			GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainTarget");
 			mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = false;
 
 			MainTracker.GetComponent<CleanupMaster> ().cleanUpAll ();
 
 			GameObject tryAgainCube = GameObject.CreatePrimitive(PrimitiveType.Cube);
-			tryAgainCube.transform.parent = GameObject.FindGameObjectWithTag ("MainBoard").GetComponent<Transform> ();
+			//tryAgainCube.transform.parent = GameObject.FindGameObjectWithTag ("MainBoard").GetComponent<Transform> ();
+			tryAgainCube.transform.parent = GameObject.FindGameObjectWithTag ("MainTarget").GetComponent<Transform> ();
 			tryAgainCube.transform.localPosition = new Vector3 (0.0f, 0.86f, -0.74f);
 			tryAgainCube.transform.localScale = new Vector3 (2.0f, 0.7f, 0.5f);
 			tryAgainCube.GetComponent<BoxCollider> ().isTrigger = true;

@@ -106,7 +106,10 @@ namespace Vuforia
 				themeMusic.clip = soundtracks [MusicSelection];
 				themeMusic.Play ();
 
-				GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+				//GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+				//mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = true;
+
+				GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainTarget");
 				mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = true;
 			}
         }
@@ -137,8 +140,10 @@ namespace Vuforia
 			themeMusic.clip = soundtracks [MusicSelection];
 			themeMusic.Play ();
 
-			GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
-			mainBoard.GetComponent<EnemySpawnManager> ().Init();
+			//GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+			//mainBoard.GetComponent<EnemySpawnManager> ().Init();
+			GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainTarget");
+			mainBoard.GetComponent<EnemySpawnManager> ().Init ();
 
 			GameObject[] musicBoxes = GameObject.FindGameObjectsWithTag ("MusicSelectionBox");
 			foreach(GameObject box in musicBoxes) {
@@ -174,7 +179,9 @@ namespace Vuforia
 				AudioSource themeMusic = gameObject.GetComponent<AudioSource> ();
 				themeMusic.Stop ();
 
-				GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+				//GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
+				//mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = false;
+				GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainTarget");
 				mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = false;
 
 				gameObject.GetComponent<CleanupMaster> ().cleanUpAll ();

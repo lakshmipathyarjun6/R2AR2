@@ -25,7 +25,7 @@ public class PlayerHit : MonoBehaviour {
 			RudeComments.text = "WOAAHHHHHH DONT DO THAT SHIT BRUH!!!!";
 
 			gameObject.GetComponent<AudioSource> ().Play ();
-			Instantiate (explosionEffect, transform.position + new Vector3(0.0f,1.0f,0.0f), transform.rotation);
+			Instantiate (explosionEffect, transform.position + new Vector3(-5.0f,6.0f,.0f), transform.rotation);
 
 			Destroy (col.gameObject);
 		} 
