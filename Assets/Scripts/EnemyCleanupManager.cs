@@ -15,7 +15,7 @@ public class EnemyCleanupManager : MonoBehaviour {
 		if (col.gameObject.tag == "EnemyFire") {
 			Destroy (col.gameObject);
 			check = UIController.Instance.state;
-			if(check != 1)
+			if(check == 2)
 			{
 				uicanvas.GetComponent<UIController> ().updateScore (1);
 			}
@@ -25,7 +25,7 @@ public class EnemyCleanupManager : MonoBehaviour {
 			Destroy (col.gameObject);
 			destroyed++;
 			check = UIController.Instance.state;
-			if(check != 1)
+			if(check == 2)
 			{
 				uicanvas.GetComponent<UIController> ().updateScore (5);
 			}

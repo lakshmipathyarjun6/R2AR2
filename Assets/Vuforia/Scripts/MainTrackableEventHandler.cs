@@ -177,7 +177,7 @@ namespace Vuforia
 				GameObject mainBoard = GameObject.FindGameObjectWithTag ("MainBoard");
 				mainBoard.GetComponent<EnemySpawnManager> ().canSpawn = false;
 
-				gameObject.GetComponent<CleanupMaster> ().cleanUpAll ();
+				//gameObject.GetComponent<CleanupMaster> ().cleanUpAll ();
 			}
         }
 
